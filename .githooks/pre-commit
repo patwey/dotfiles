@@ -32,12 +32,13 @@ then
   fi
 
   # run rubocop on the staged ruby files
+  echo
   rubocop ${RB_FILES}
 
   if [ $? -ne 0 ]; then
-    rubocop_pass=true
-  else
     rubocop_pass=false
+  else
+    rubocop_pass=true
   fi
 else
   rubocop_pass=true
@@ -53,6 +54,7 @@ then
   fi
 
   # run eslint on the staged js files
+  echo
   eslint ${JS_FILES}
 
   if [ $? -ne 0 ]; then
@@ -66,7 +68,7 @@ fi
 
 # print summary
 echo
-if [ rubocop_pass ]; then
+if ${rubocop_pass}; then
   printf "  [ ${green}${checkmark}${NC} ] "
 else
   printf "  [ ${red}${crossmark}${NC} ] "
@@ -84,5 +86,14 @@ echo
 if ${rubocop_pass} && ${eslint_pass}; then
   exit 0
 else
-  exit 1
+  echo "Commit ${yellow}anyway${NC}? [ y/n ]"
+  printf "$ "
+  exec < /dev/tty
+	read resp
+
+	if [ "$resp" = 'y' -o "$resp" = 'Y' ]; then
+    exit 0
+  else
+    exit 1
+  fi
 fi
