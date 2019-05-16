@@ -1,15 +1,38 @@
 #!/bin/sh
 
+# colors
 red='\033[0;31m'
 green='\033[0;32m'
+yellow='\033[0;33m'
 NC='\033[0m'
 
-echo "${green}[Commit Message][Info]: Checking commit message${NC}"
+# emojis
+checkmark='\xE2\x9C\x94'
+crossmark='\xE2\x9C\x96'
 
+echo
+echo "[ commit-msg checks ]"
+
+# check first line char limit
 cat "$1" | head -1 | grep -e '^..\{50\}' >/dev/null && {
 	first_line=$(cat "$1" | head -1)
-  echo >&2 "${red}[Commit Message][Error]: First line exceeds 50 char limit. (${#first_line} chars)"
-  exit 1
+	echo
+  echo >&2 "  ${red}[first line]: exceeds char limit (${#first_line}/50)${NC}"
+	first_line_valid=false
 }
 
-exit 0
+# print summary
+echo
+if ${first_line_valid}; then
+	printf "  [ ${green}${checkmark}${NC} ] "
+else
+	printf "  [ ${red}${crossmark}${NC} ] "
+fi
+echo "first line"
+
+echo
+if ${first_line_valid}; then
+	exit 0
+else
+	exit 1
+fi

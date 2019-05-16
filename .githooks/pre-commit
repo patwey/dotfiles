@@ -1,63 +1,88 @@
 #!/bin/sh
-#
-# Check for ruby style errors
 
+# colors
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
 NC='\033[0m'
 
+# emojis
+checkmark='\xE2\x9C\x94'
+crossmark='\xE2\x9C\x96'
+
+echo
+echo "[ pre-commit checks ]"
+
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
   against=HEAD
 else
-  # Initial commit: diff against an empty tree object
-  # Change it to match your initial commit sha
+  # initial commit: diff against an empty tree object
+  # change it to match your initial commit sha
   against=123acdac4c698f24f2352cf34c3b12e246b48af1
 fi
 
-# Get only the staged files
+# get only the staged files
 RB_FILES="$(git diff --cached --name-only --diff-filter=AMC | grep "\.rb$" | tr '\n' ' ')"
-
-echo "${green}[Ruby Style][Info]: Checking Ruby Style${NC}"
 
 if [ -n "$RB_FILES" ]
 then
-  echo "${green}[Ruby Style][Info]: ${RB_FILES}${NC}"
-
   if [ ! -f '.rubocop.yml' ]; then
-    echo "${yellow}[Ruby Style][Warning]: No .rubocop.yml config file.${NC}"
+    echo "\n  ${yellow}[rubocop]: no .rubocop.yml config file.${NC}\n"
   fi
 
-  # Run rubocop on the staged ruby files
+  # run rubocop on the staged ruby files
   rubocop ${RB_FILES}
 
   if [ $? -ne 0 ]; then
-    echo "${red}[Ruby Style][Error]: Fix the issues and commit again${NC}"
-    exit 1
+    rubocop_pass=true
+  else
+    rubocop_pass=false
   fi
 else
-  echo "${green}[Ruby Style][Info]: No ruby files to check${NC}"
+  rubocop_pass=true
 fi
 
-echo "${green}[Ruby Style][Info]: Checking JS Style${NC}"
-
-# Get only the staged files
+# get only the staged files
 JS_FILES="$(git diff --cached --name-only --diff-filter=AMC | grep "\.js[x]*$" | tr '\n' ' ')"
 
 if [ -n "$JS_FILES" ]
 then
-  echo "${green}[JS Style][Info]: ${JS_FILES}${NC}"
+  if [ ! -f '.eslintrc' ]; then
+    echo "\n  ${yellow}[eslint] no .eslintrc config file.${NC}\n"
+  fi
 
-  # Run rubocop on the staged ruby files
+  # run eslint on the staged js files
   eslint ${JS_FILES}
 
   if [ $? -ne 0 ]; then
-    echo "${red}[JS Style][Error]: Fix the issues and commit again${NC}"
-    exit 1
+    eslint_pass=false
+  else
+    eslint_pass=true
   fi
 else
-  echo "${green}[JS Style][Info]: No JS files to check${NC}"
+  eslint_pass=true
 fi
 
-exit 0
+# print summary
+echo
+if [ rubocop_pass ]; then
+  printf "  [ ${green}${checkmark}${NC} ] "
+else
+  printf "  [ ${red}${crossmark}${NC} ] "
+fi
+echo "rubocop"
+
+if ${eslint_pass}; then
+  printf "  [ ${green}${checkmark}${NC} ] "
+else
+  printf "  [ ${red}${crossmark}${NC} ] "
+fi
+echo "eslint"
+
+echo
+if ${rubocop_pass} && ${eslint_pass}; then
+  exit 0
+else
+  exit 1
+fi
