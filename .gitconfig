@@ -84,3 +84,5 @@ default = current
 [user]
 	name = Pat Wey
 	email = patrickwey@gmail.com
+[core]
+	hooksPath = /Users/patwey/.githooks
