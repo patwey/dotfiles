@@ -1,0 +1,15 @@
+#!/bin/sh
+
+red='\033[0;31m'
+green='\033[0;32m'
+NC='\033[0m'
+
+echo "${green}[Commit Message][Info]: Checking commit message${NC}"
+
+cat "$1" | head -1 | grep -e '^..\{50\}' >/dev/null && {
+	first_line=$(cat "$1" | head -1)
+  echo >&2 "${red}[Commit Message][Error]: First line exceeds 50 char limit. (${#first_line} chars)"
+  exit 1
+}
+
+exit 0
