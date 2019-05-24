@@ -32,6 +32,7 @@ fi)'" \$ "
 # Aliases
 alias g="git"
 alias be="bundle exec"
+alias emacs="open /Applications/Emacs.app"
 alias ss="cd ~/code/silver-sheet;itermocil silversheet"
 
 # rbenv

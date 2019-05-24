@@ -13,4 +13,4 @@ windows:
       - echo "Rack::Timeout.unregister_state_change_observer(:logger) if Rails.env.development?"  >> config/initializers/rack_timeout.rb;rails s -p 5000
       - bundle exec sidekiq
       - (ps aux | grep 6379 | grep redis | awk '{ print $2 }' | xargs kill -s SIGINT) && sleep .1 && redis-server /usr/local/etc/redis.conf
-      - atom .;sleep 5;redis-cli flushall;awk '!/unregister_state_change_observer/' config/initializers/rack_timeout.rb > temp && mv -f temp config/initializers/rack_timeout.rb;npm start
+      - emacs;sleep 5;redis-cli flushall;awk '!/unregister_state_change_observer/' config/initializers/rack_timeout.rb > temp && mv -f temp config/initializers/rack_timeout.rb;npm start
