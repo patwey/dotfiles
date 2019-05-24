@@ -86,3 +86,4 @@ default = current
 	email = patrickwey@gmail.com
 [core]
 	hooksPath = /Users/patwey/.githooks
+	excludesfile = /Users/patwey/.gitignore_global
