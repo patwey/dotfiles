@@ -26,7 +26,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; Define he following variables to remove the compile-log warnings
+;; Define the following variables to remove the compile-log warnings
 ;; when defining ido-ubiquitous
 ;; (defvar ido-cur-item nil)
 ;; (defvar ido-default-item nil)
