@@ -1,6 +1,9 @@
 # Add local install of qmake to path
 export PATH="/Users/patwey/Qt5.5.0/5.5/clang_64/bin/:$PATH"
 
+# Set Emacs as editor
+export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs"
+
 # Git completion
 source ~/.git-completion.bash
 
@@ -32,7 +35,6 @@ fi)'" \$ "
 # Aliases
 alias g="git"
 alias be="bundle exec"
-alias emacs="open /Applications/Emacs.app"
 alias ss="cd ~/code/silver-sheet;itermocil silversheet"
 
 # rbenv
