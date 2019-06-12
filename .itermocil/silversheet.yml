@@ -7,4 +7,3 @@ windows:
       - echo "Rack::Timeout.unregister_state_change_observer(:logger) if Rails.env.development?"  >> config/initializers/rack_timeout.rb;rails s -p 5000
       - be sidekiq
       - open -a /Applications/Emacs.app;sleep 5;redis-cli flushall;awk '!/unregister_state_change_observer/' config/initializers/rack_timeout.rb > temp && mv -f temp config/initializers/rack_timeout.rb;npm start
-g
