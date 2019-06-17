@@ -84,7 +84,7 @@ default = current
 [user]
 	name = Pat Wey
 	email = patrickwey@gmail.com
-	signingkey = 589818C278487726
+	signingkey = A8CDFAB44BEF4EDC
 [core]
 	hooksPath = /Users/patwey/.githooks
 	excludesfile = /Users/patwey/.gitignore_global
