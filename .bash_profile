@@ -4,6 +4,10 @@ export PATH="/Users/patwey/Qt5.5.0/5.5/clang_64/bin/:$PATH"
 # Set Emacs as editor
 export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs"
 
+# GPG
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # Git completion
 source ~/.git-completion.bash
 
