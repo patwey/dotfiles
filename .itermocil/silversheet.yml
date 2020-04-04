@@ -1,9 +1,13 @@
 name: silversheet
 windows:
+  - name: rails-console
+    root: ~/code/silver-sheet
+    panes:
+      - rails console
   - name: server-sidekiq-npm
     root: ~/code/silver-sheet
-    layout: main-vertical
+    layout: tiled
     panes:
-      - echo "Rack::Timeout.unregister_state_change_observer(:logger) if Rails.env.development?"  >> config/initializers/rack_timeout.rb;rails s -p 5000
       - be sidekiq
-      - open -a /Applications/Emacs.app;sleep 5;redis-cli flushall;awk '!/unregister_state_change_observer/' config/initializers/rack_timeout.rb > temp && mv -f temp config/initializers/rack_timeout.rb;npm start
+      - npm start
+      - rails server -p 5000
