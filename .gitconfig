@@ -90,3 +90,5 @@ default = current
 	excludesfile = /Users/patwey/.gitignore_global
 [commit]
 	gpgsign = true
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2
