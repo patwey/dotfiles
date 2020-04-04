@@ -1,8 +1,8 @@
 # Add local install of qmake to path
 export PATH="/Users/patwey/Qt5.5.0/5.5/clang_64/bin/:$PATH"
 
-# Set Emacs as editor
-export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs"
+# Set vscode as editor
+export EDITOR="code -w"
 
 # GPG
 GPG_TTY=$(tty)
@@ -13,9 +13,9 @@ source ~/.git-completion.bash
 
 # Prompt
 Reset="\[\033[0m\]"
-Red="\[\033[1;31m\]"
-Green="\[\033[1;32m\]"
-Blue="\[\033[1;34m\]"
+Red="\[\033[0;31m\]"
+Green="\[\033[0;32m\]"
+Blue="\[\033[0;34m\]"
 
 gitPs1()
 {
@@ -44,3 +44,4 @@ alias ss="cd ~/code/silver-sheet;itermocil silversheet"
 # rbenv
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
