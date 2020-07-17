@@ -26,7 +26,7 @@ gitPs1()
         fi
 }
 
-export PS1="$Blue\W$Reset"'$(git branch > /dev/null 2>&1; \
+export PS1="\W"'$(git branch > /dev/null 2>&1; \
 if [ $? -eq 0 ]; then \
         echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
         if [ $? -eq 0 ]; then \
