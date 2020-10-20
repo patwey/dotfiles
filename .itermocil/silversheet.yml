@@ -7,11 +7,11 @@ windows:
   - name: rails server
     root: ~/code/silver-sheet
     panes:
-      - rails server -p 5000
+      - spring stop && rails server -p 5000
   - name: sidekiq
     root: ~/code/silver-sheet
     panes:
-      - be sidekiq
+      - brew services restart redis && be sidekiq
   - name: webpack
     root: ~/code/silver-sheet
     panes:
