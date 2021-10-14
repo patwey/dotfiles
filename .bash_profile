@@ -39,9 +39,8 @@ fi)'" \$ "
 # Aliases
 alias g="git"
 alias be="bundle exec"
-alias ss="cd ~/code/silver-sheet;itermocil silversheet"
+alias ss="cd ~/code/silver-sheet;itermocil silversheet --here"
 
-# rbenv
-export RBENV_ROOT=/usr/local/var/rbenv
-eval "$(rbenv init -)"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

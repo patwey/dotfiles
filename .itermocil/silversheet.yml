@@ -1,22 +1,8 @@
-name: silversheet
 windows:
-  - name: rails console
+  - name: server / npm / sidekiq
     root: ~/code/silver-sheet
+    layout: main-vertical
     panes:
-      - spring stop && rails console
-  - name: rails server
-    root: ~/code/silver-sheet
-    panes:
-      - spring stop && rails server -p 5000
-  - name: sidekiq
-    root: ~/code/silver-sheet
-    panes:
-      - brew services restart redis && be sidekiq
-  - name: webpack
-    root: ~/code/silver-sheet
-    panes:
+      - sh start_server.sh
       - npm start
-  - name: node
-    root: ~/code/silver-sheet
-    panes:
-      - node
+      - sleep 5 && brew services restart redis && be sidekiq

@@ -85,3 +85,6 @@ flycheck_*.el
 
 # network security
 /network-security.data
+
+# custom scripts
+start_server.sh
